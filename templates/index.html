@@ -1,0 +1,35 @@
+<!-- templates/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple PDF Merger</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Merge Two PDFs</h1>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul class="flashes">
+              {% for message in messages %}
+                <li>{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="pdf1">Select first PDF:</label>
+                <input type="file" name="pdf1" id="pdf1" accept="application/pdf" required>
+            </div>
+            <div class="form-group">
+                <label for="pdf2">Select second PDF:</label>
+                <input type="file" name="pdf2" id="pdf2" accept="application/pdf" required>
+            </div>
+            <button type="submit">Merge PDFs</button>
+        </form>
+    </div>
+</body>
+</html>
