@@ -27,14 +27,6 @@ ENV PYTHONUNBUFFERED=1
 # Set work directory
 WORKDIR /app
 
-# Install runtime dependencies (if any)
-# For most Flask apps, runtime dependencies are covered by the Python packages.
-# If your application requires additional system packages, install them here.
-# Example:
-# RUN apt-get update && \
-#     apt-get install -y --no-install-recommends some-runtime-package && \
-#     rm -rf /var/lib/apt/lists/*
-
 # Copy Python dependencies from the builder stage
 COPY --from=builder /root/.local /root/.local
 
