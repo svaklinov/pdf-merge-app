@@ -1,14 +1,14 @@
 # Stage 1: Builder
-FROM python:3.9-slim AS builder
+FROM python:3.9-alpine AS builder
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 # Install build dependencies
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends gcc libpq-dev && \
-    rm -rf /var/lib/apt/lists/*
+RUN apk update && \
+    apk add --no-cache gcc musl-dev postgresql-dev && \
+    rm -rf /var/cache/apk/*
 
 # Set work directory
 WORKDIR /app
@@ -18,7 +18,7 @@ COPY requirements.txt .
 RUN pip install --upgrade pip && pip install --user -r requirements.txt
 
 # Stage 2: Production
-FROM python:3.9-slim
+FROM python:3.9-alpine
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1
